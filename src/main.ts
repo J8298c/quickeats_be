@@ -1,6 +1,7 @@
 import express from 'express';
 import dotenv from 'dotenv';
 import mongoose from 'mongoose';
+import restaurantRouter from './routers/restaurant.router';
 
 dotenv.config();
 
@@ -19,5 +20,7 @@ mongoose.connect(process.env.MONGO_URL).then(() => {
 }).catch(err => {
 	console.error(err);
 });
+
+app.use('/restaurants', restaurantRouter);
 
 app.listen(PORT, () => console.log(`app is listening port ${PORT}`));
