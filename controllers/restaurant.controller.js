@@ -5,8 +5,12 @@ const restaurantRouter = express.Router();
 
 restaurantRouter.get('/near/:borough', async (req, res) => {
   try {
-    const restaurants = await restaurantModel.find({ borough: req.params.borough });
-    console.log(restaurants, 'the restaurants');
+    const { score } = req.query;
+    console.log(score, 'the score');
+    const query = {
+      borough: req.params.borough,
+    };
+    const restaurants = await restaurantModel.find(query);
     res.status(200).json({ restaurants });
   } catch (error) {
     res.status(500).json({ error: 'server error occurred' });
