@@ -1,6 +1,8 @@
 const express = require('express');
 const dotenv = require('dotenv');
 const mongoose = require('mongoose');
+// eslint-disable-next-line import/no-extraneous-dependencies
+const cors = require('cors');
 const restaurantRouter = require('./controllers/restaurant.controller');
 
 dotenv.config();
@@ -19,6 +21,7 @@ mongoose
 const PORT = process.env.PORT || 3001;
 
 app.use(express.json());
+app.use(cors());
 app.use('/api/restaurants', restaurantRouter);
 
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
